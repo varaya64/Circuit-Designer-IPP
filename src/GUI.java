@@ -7,6 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.Lighting;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -50,11 +54,14 @@ public class GUI extends Application {
 		 
 		Button buttonSave = new Button("Guardar Circuito");
 		Button buttonReset = new Button("Nuevo Cicuito");
-		Button buttonPlay = new Button("PLAY");
-		VBox panelButton = new VBox();
-		panelButton.getChildren().addAll(buttonSave, buttonReset, buttonPlay);
+		Button buttonPlay = new Button("Play");
+		Button buttonExitDC = new Button("Salir");
+		VBox panelButton = new VBox(20);
+		panelButton.getChildren().addAll(buttonSave, buttonReset, buttonPlay, buttonExitDC);
 		 
 		HBox panelVBox = new HBox(20);
+		panelVBox.setAlignment(Pos.BOTTOM_RIGHT);
+		panelVBox.setPadding(new Insets(15, 15, 15, 15));
 		panelVBox.getChildren().addAll(panelText, panelButton);
 		 
 		Rectangle lg1 = new Rectangle(40, 40, Color.CADETBLUE);
@@ -66,6 +73,7 @@ public class GUI extends Application {
 		Rectangle lg7 = new Rectangle(40, 40);
 		 
 		VBox panelLogicGates = new VBox(20);
+		panelLogicGates.setAlignment(Pos.TOP_LEFT);
 		panelLogicGates.getChildren().addAll(lg1,lg2, lg3, lg4 ,lg5 ,lg6 ,lg7);
 		 
 		Text title = new Text("Arrastre y conecte aqui las compuertas");
@@ -80,12 +88,24 @@ public class GUI extends Application {
 			
 		
 		Scene display2 = new Scene(canvas2, 1000, 800);			
-		button1.setOnAction(e -> primaryStage.setScene(display2));
-		// Final Scene Circuit Designer
 		
+//******************************* Final Scene Circuit Designer*****************************//
+		button1.setOnAction(e -> primaryStage.setScene(display2));
+		buttonExitDC.setOnAction(e -> primaryStage.setScene(display1));
 		primaryStage.setTitle("Circuit Designer By Carmen Araya");
 		primaryStage.setResizable(false);
 		primaryStage.show();
+		
+		lg6.setOnDragDetected(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				Dragboard db = lg6.startDragAndDrop(TransferMode.ANY);
+				ClipboardContent content = new ClipboardContent();
+				content.putString("Hello!");
+		        db.setContent(content);
+		        event.consume();
+			}
+			
+		});
 		
 	}
 
