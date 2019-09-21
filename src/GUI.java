@@ -20,6 +20,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -71,31 +72,42 @@ public class GUI extends Application {
 		panelVBox.setAlignment(Pos.BOTTOM_RIGHT);
 		panelVBox.setPadding(new Insets(15, 15, 15, 15));
 		panelVBox.getChildren().addAll(panelText, panelButton);
-
 		
+		Image gate1 = new Image("file:and.png");
+	   	ImageView gate1V = new ImageView(gate1);
+	   	gate1V.setX(40); 
+	   	gate1V.setY(40); 
+	   	Image gate2 = new Image("file:nand.png");
+	   	ImageView gate2V = new ImageView(gate2);
+	   	gate2V.setX(40); 
+	   	gate2V.setY(50);
+	   	Image gate3 = new Image("file:nor.png");
+	   	ImageView gate3V = new ImageView(gate3);
+	   	gate3V.setX(40); 
+	   	gate3V.setY(40);  
+	   	Image gate4 = new Image("file:not.png");
+	   	ImageView gate4V = new ImageView(gate4);
+	   	gate4V.setX(40); 
+	   	gate4V.setY(50);
+	   	Image gate5 = new Image("file:or.png");
+	   	ImageView gate5V = new ImageView(gate5);
+	   	gate5V.setX(40); 
+	   	gate5V.setY(40);  
+	   	Image gate6 = new Image("file:xnor.png");
+	   	ImageView gate6V = new ImageView(gate6);
+	   	gate6V.setX(40); 
+	   	gate6V.setY(50);
+	   	Image gate7 = new Image("file:xor.png");
+	   	ImageView gate7V = new ImageView(gate7);
+	   	gate7V.setX(40); 
+	   	gate7V.setY(40);  
+
 		VBox panelLogicGates = new VBox(20);
 		panelLogicGates.setAlignment(Pos.CENTER_LEFT);
-		
-	    String[] images = {"file:and.png", "file:and.png", "file:and.png", "file:and.png", "file:and.png",
-	    		"file:and.png", "file:and.png"};
-		
-	    for (String i:images) {
-	    	Image image = new Image("file:and.png");
-	    	ImageView imageView = new ImageView(image);
-	    	imageView.setX(40); 
-	    	imageView.setY(40); 
-	    	imageView.setFitHeight(150); 
-	    	imageView.setFitWidth(150); 
-	    	imageView.setPreserveRatio(true); 
-	    	panelLogicGates.getChildren().addAll( imageView);
-	    }
+	   	panelLogicGates.getChildren().addAll(gate1V, gate2V, gate3V, gate4V, gate5V, gate6V, gate7V);
 
-		ImageView[] gates = {imageView};
-		
-		Canvas draw = new Canvas(1000, 600);
-		GraphicsContext gc = draw.getGraphicsContext2D();
-		gc.setFill(Color.ALICEBLUE);
-		gc.fillRect(0, 0, draw.getWidth(), draw.getHeight());
+		Pane draw = new Pane();
+		draw.setMinSize(1000, 600);
 		
 		HBox HBoxDraw = new HBox(1);
 		HBoxDraw.setAlignment(Pos.CENTER_RIGHT);
@@ -121,15 +133,19 @@ public class GUI extends Application {
 		primaryStage.setTitle("Circuit Designer By Carmen Araya");
 		primaryStage.setResizable(false);
 		
+		//Image[] gates = {gate1, gate2, gate3, gate4, gate5, gate6, gate7};
+		ImageView[] gatesV = {gate1V, gate2V, gate3V, gate4V, gate5V, gate6V, gate7V};
+		String[] gates = {"file:and.png", "file:nand.png", "file:nor.png", "file:not.png",
+				"file:or.png", "file:xnor.png", "file:xor.png"};
 		
-		
-		for (int i=0 ; i < 1; i++ ) {
-			ImageView Puerta = gates[i];
-			imageView.setOnDragDetected(new EventHandler<MouseEvent>() {
+		for (int i=0 ; i < 7; i++ ) {
+			ImageView selected = gatesV[i];
+			String selected2 = gates[i];
+			selected.setOnDragDetected(new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent event) {
-					Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
+					Dragboard db = selected.startDragAndDrop(TransferMode.ANY);
 					ClipboardContent content = new ClipboardContent();
-					content.putString("Hello!");
+					content.putString(selected2);
 					db.setContent(content);
 					event.consume();
 				}
@@ -147,13 +163,12 @@ public class GUI extends Application {
 		
 			draw.setOnDragEntered(new EventHandler<DragEvent>() {
 				public void handle(DragEvent event) {
-					if (event.getGestureSource() != gc && event.getDragboard().hasString()) {
-						System.out.println("En el objetivo");
+					if (event.getGestureSource() != draw && event.getDragboard().hasString()) {
 					}
 					event.consume();
 				}
 			});
-		
+			
 			draw.setOnDragDropped(new EventHandler<DragEvent>() {
 				public void handle(DragEvent event) {
 					Dragboard db = event.getDragboard();
@@ -161,8 +176,16 @@ public class GUI extends Application {
 					if (db.hasString()) {
 					System.out.println("Solte mouse objetivo");
 					success = true;
-					gc.setFill(Color.FORESTGREEN);
-					gc.fillRect(0, 0, draw.getWidth(), draw.getHeight());
+					ImageView nueva = new ImageView(); 
+					Image com = new Image(db.getString());
+					nueva.setImage(com);
+					double mouseX = event.getX();
+					double mouseY = event.getY();
+					double ancho = (nueva.getImage().getWidth()*0.5);
+					double largo = (nueva.getImage().getHeight()*0.5);
+					nueva.setX(mouseX-ancho);
+					nueva.setY(mouseY-largo);
+					draw.getChildren().addAll(nueva);
 					}
 					event.setDropCompleted(success);
 					event.consume();
@@ -171,7 +194,7 @@ public class GUI extends Application {
 		
 			draw.setOnDragExited( new EventHandler<DragEvent>() {
 				public void handle(DragEvent event) {
-					lg5.setFill(Color.DARKSALMON);
+					System.out.println("hola");
 					event.consume();
 				}
 			});
