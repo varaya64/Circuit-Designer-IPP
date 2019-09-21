@@ -2,10 +2,8 @@ package Clases;
 
 public class Nor  extends LogicGate{
 
-	
-	
-	public Nor() {
-		super();
+	public Nor(String type) {
+		super(type);
 	}
 
 	@Override

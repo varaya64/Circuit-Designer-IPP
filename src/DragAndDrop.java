@@ -15,7 +15,6 @@ public class DragAndDrop {
 	
 	public void paintGates(Pane panel, ImageView gateV, String gate) {
 		
-		FactoryGates fg = new FactoryGates();
 		List listGates = new List();
 		
 		gateV.setOnDragDetected(new EventHandler<MouseEvent>() {
@@ -55,7 +54,8 @@ public class DragAndDrop {
 				nueva.setX(mouseX-ancho);
 				nueva.setY(mouseY-largo);
 				panel.getChildren().addAll(nueva);	
-				FactoryGates.newlogicGate(db.getString());
+				listGates.addLast(db.getString());
+				
 				}
 				event.setDropCompleted(success);
 				event.consume();

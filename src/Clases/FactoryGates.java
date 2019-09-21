@@ -4,32 +4,25 @@ public class FactoryGates {
 	
 	public static LogicGate newlogicGate(String type) {
 		if(type.equals("file:and.png")) {
-		System.out.println("agrego and");
-		return new And();
+		return new And(type);
 		}
 		else if(type.equals("file:nand.png")) {
-		System.out.println("agrego nand");
-		return new Nand();
+		return new Nand(type);
 		}
 		else if(type.equals("file:nor.png")) {
-		System.out.println("agrego nor");
-		return new Nor();
+		return new Nor(type);
 		}
 		else if(type.equals("file:xor.png")) {
-		System.out.println("agrego xor");
-		return new Xor();
+		return new Xor(type);
 		}
 		else if(type.equals("file:or.png")) {
-		System.out.println("agrego or");
-		return new Or();
+		return new Or(type);
 		}
 		else if(type.equals("file:not.png")) {
-		System.out.println("agrego not");
-		return new Not();
+		return new Not(type);
 		}
 		else {
-		System.out.println("agrego xnor");
-		return new Xnor();
+		return new Xnor(type);
 		}
 		
 	

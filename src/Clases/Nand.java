@@ -2,6 +2,10 @@ package Clases;
 
 public class Nand extends LogicGate{
 
+	public Nand(String type) {
+		super(type);
+	}
+
 	@Override
 	public void trueValue() {	
 		boolean result = true;
