@@ -1,31 +1,21 @@
-import java.awt.Event;
-import java.io.FileInputStream;
-
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class GUI extends Application {
@@ -102,25 +92,31 @@ public class GUI extends Application {
 	   	gate7V.setX(40); 
 	   	gate7V.setY(40);  
 
-		VBox panelLogicGates = new VBox(20);
-		panelLogicGates.setAlignment(Pos.CENTER_LEFT);
+		VBox panelLogicGates = new VBox(10);
+		panelLogicGates.setAlignment(Pos.BOTTOM_LEFT);
 	   	panelLogicGates.getChildren().addAll(gate1V, gate2V, gate3V, gate4V, gate5V, gate6V, gate7V);
 
 		Pane draw = new Pane();
-		draw.setMinSize(1000, 600);
+		draw.setPrefSize(2000, 1200);
+		
+		ScrollPane sb = new ScrollPane(draw);
+		sb.setMinSize(1000, 800);
+		sb.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+		sb.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+
 		
 		HBox HBoxDraw = new HBox(1);
 		HBoxDraw.setAlignment(Pos.CENTER_RIGHT);
-		HBoxDraw.getChildren().addAll(draw);
+		HBoxDraw.getChildren().addAll(sb);
 
 
 
 		HBox panelMain = new HBox(200);
-		panelMain.setAlignment(Pos.CENTER_LEFT);
+		//panelMain.setAlignment(Pos.CENTER_LEFT);
 		panelMain.setPadding(new Insets(15, 15, 15, 15));
 		panelMain.getChildren().addAll( panelLogicGates, HBoxDraw);
 
-		StackPane canvas2 = new StackPane();
+		BorderPane canvas2 = new BorderPane();
 		canvas2.getChildren().addAll(panelMain);
 		
 
@@ -129,80 +125,28 @@ public class GUI extends Application {
 
 		//******************************* Final Scene Circuit Designer*****************************//
 		button1.setOnAction(e -> primaryStage.setScene(display2));
+
 		buttonExitDC.setOnAction(e -> primaryStage.setScene(display1));
 		primaryStage.setTitle("Circuit Designer By Carmen Araya");
 		primaryStage.setResizable(false);
 		
+		
+//----------------------------------Drag and drop-------------------------------------------------//		
 		//Image[] gates = {gate1, gate2, gate3, gate4, gate5, gate6, gate7};
 		ImageView[] gatesV = {gate1V, gate2V, gate3V, gate4V, gate5V, gate6V, gate7V};
 		String[] gates = {"file:and.png", "file:nand.png", "file:nor.png", "file:not.png",
 				"file:or.png", "file:xnor.png", "file:xor.png"};
 		
+		DragAndDrop dp = new DragAndDrop();
+		
 		for (int i=0 ; i < 7; i++ ) {
 			ImageView selected = gatesV[i];
 			String selected2 = gates[i];
-			selected.setOnDragDetected(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent event) {
-					Dragboard db = selected.startDragAndDrop(TransferMode.ANY);
-					ClipboardContent content = new ClipboardContent();
-					content.putString(selected2);
-					db.setContent(content);
-					event.consume();
-				}
-
-			});
-
-			draw.setOnDragOver(new EventHandler<DragEvent>() {
-				public void handle(DragEvent event) {
-					if (event.getGestureSource() != draw && event.getDragboard().hasString()) {
-						event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-					}
-					event.consume();
-				}
-			});
-		
-			draw.setOnDragEntered(new EventHandler<DragEvent>() {
-				public void handle(DragEvent event) {
-					if (event.getGestureSource() != draw && event.getDragboard().hasString()) {
-					}
-					event.consume();
-				}
-			});
-			
-			draw.setOnDragDropped(new EventHandler<DragEvent>() {
-				public void handle(DragEvent event) {
-					Dragboard db = event.getDragboard();
-					boolean success = false;
-					if (db.hasString()) {
-					System.out.println("Solte mouse objetivo");
-					success = true;
-					ImageView nueva = new ImageView(); 
-					Image com = new Image(db.getString());
-					nueva.setImage(com);
-					double mouseX = event.getX();
-					double mouseY = event.getY();
-					double ancho = (nueva.getImage().getWidth()*0.5);
-					double largo = (nueva.getImage().getHeight()*0.5);
-					nueva.setX(mouseX-ancho);
-					nueva.setY(mouseY-largo);
-					draw.getChildren().addAll(nueva);
-					}
-					event.setDropCompleted(success);
-					event.consume();
-				}
-			});
-		
-			draw.setOnDragExited( new EventHandler<DragEvent>() {
-				public void handle(DragEvent event) {
-					System.out.println("hola");
-					event.consume();
-				}
-			});
-		
+			dp.paintGates(draw, selected, selected2);
 		}
 	primaryStage.show();
 	}
-
+//---------------------------------------------------------------------------------------------------------//
 
 }
 

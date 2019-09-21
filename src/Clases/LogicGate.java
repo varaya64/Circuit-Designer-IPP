@@ -1,51 +1,37 @@
 package Clases;
 
-public class LogicGate {
+public abstract class LogicGate {
 	
-	protected int nInputs;
-	protected int outpot;
-	protected boolean input1;
-	protected boolean input2; 
-	protected String type;
+	private boolean input1;
+	private boolean input2;
+	private boolean output;
+	private LogicGate next;
+	private LogicGate prev;
+	private LogicGate prevAux1;
+	private LogicGate prevAux2;
 	
-	public LogicGate(String type, int nInputs) {
-		this.nInputs = nInputs;
-		this.type = type;
-		outpot = (Integer) null;
-		input1 = (Boolean) null;
-		input2 = (Boolean) null;
-	}
-
-	public int getnInputs() {
-		return nInputs;
-	}
-
-	public int getOutpot() {
-		return outpot;
-	}
-
-	public boolean getInput1() {
+	
+ 	public boolean isInput1() {
 		return input1;
 	}
-	
-	public boolean getInput2() {
-		return input2;
-	}
-
 	public void setInput1(boolean input1) {
 		this.input1 = input1;
 	}
-	
+	public boolean isInput2() {
+		return input2;
+	}
 	public void setInput2(boolean input2) {
 		this.input2 = input2;
 	}
-
-	public String getType() {
-		return type;
+	public boolean isOutpot() {
+		return output;
 	}
-
-	public void setType(String type) {
-		this.type = type;
+	public void setOutpot(boolean output) {
+		this.output = output;
 	}
 	
+	public abstract void trueValue();
+
 }
+
+	
