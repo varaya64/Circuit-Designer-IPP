@@ -1,7 +1,11 @@
 package Clases;
 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
 public class And  extends LogicGate {
 
+	
 	public And(String type) {
 		super(type);
 	}

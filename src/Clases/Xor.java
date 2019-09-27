@@ -2,8 +2,11 @@ package Clases;
 
 public class Xor  extends LogicGate {
 
+
+
 	public Xor(String type) {
 		super(type);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

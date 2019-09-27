@@ -1,5 +1,11 @@
 package Clases;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
+
 public abstract class LogicGate {
 	
 	private boolean input1;
@@ -9,11 +15,32 @@ public abstract class LogicGate {
 	private LogicGate prev;
 	private LogicGate prevAux1;
 	private LogicGate prevAux2;
+	private Rectangle input1R;
+	private Rectangle input2R;
+	private Rectangle outpot;
 	private String Type;
+	private int ID;
+	
 	
 	public LogicGate(String type) {
 		super();
 		Type = type;
+	}
+	
+	public void referencePrevAux(Pane panel) {
+		if (prevAux1 == null && prevAux2 == null) {
+			ConectionGates.paintLines(LogicGate.this.getInput1R(), panel);
+			ConectionGates.paintLines(LogicGate.this.getInput2R(), panel);
+			System.out.println("Se pueden conectar ambas compuertas");
+		}else if(prevAux1 != null && prevAux2 != null) {
+			System.out.println("No se puede conectar esta compuerta");	
+		}else if (prevAux1 == null && prevAux2 != null) {
+			ConectionGates.paintLines(LogicGate.this.getInput1R(), panel);
+			System.out.println("solo puedo conectar una entrada la 1");
+		}else if(prevAux1 != null && prevAux2 == null){
+			ConectionGates.paintLines(LogicGate.this.getInput2R(), panel);
+			System.out.println("solo puedo conectar una entrada la 1");
+		}
 	}
 	
 	public boolean isInput1() {
@@ -25,7 +52,6 @@ public abstract class LogicGate {
 	public boolean isInput2() {
 		return input2;
 	}
-
 	public void setInput2(boolean input2) {
 		this.input2 = input2;
 	}
@@ -34,8 +60,7 @@ public abstract class LogicGate {
 	}
 	public void setOutpot(boolean output) {
 		this.output = output;
-	}
-	
+	}	
 	public abstract void trueValue();
 	public LogicGate getPrevAux1() {
 		return prevAux1;
@@ -61,7 +86,37 @@ public abstract class LogicGate {
 	public void setType(String type) {
 		Type = type;
 	}
+	public LogicGate getPrevAux2() {
+		return prevAux2;
+	}
+	public void setPrevAux2(LogicGate prevAux2) {
+		this.prevAux2 = prevAux2;
+	}
 
+	public Rectangle getOutpot() {
+		return outpot;
+	}
+	public void setOutpot(Rectangle outpot) {
+		this.outpot = outpot;
+	}
+	public Rectangle getInput2R() {
+		return input2R;
+	}
+	public void setInput2R(Rectangle input2r) {
+		input2R = input2r;
+	}
+	public Rectangle getInput1R() {
+		return input1R;
+	}
+	public void setInput1R(Rectangle input1r) {
+		input1R = input1r;
+	}
+	public int getID() {
+		return ID;
+	}
+	public void setID(int iD) {
+		ID = iD;
+	}
 }
 
 	

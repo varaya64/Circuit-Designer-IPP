@@ -1,3 +1,4 @@
+package Clases;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -51,17 +52,11 @@ public class GUI extends Application {
 		VBox panelText = new VBox();
 		panelText.getChildren().addAll(circuitName);
 
-		Button buttonSave = new Button("Guardar Circuito");
-		Button buttonReset = new Button("Nuevo Cicuito");
-		Button buttonPlay = new Button("Play");
-		Button buttonExitDC = new Button("Salir");
-		VBox panelButton = new VBox(20);
-		panelButton.getChildren().addAll(buttonSave, buttonReset, buttonPlay, buttonExitDC);
 
 		HBox panelVBox = new HBox(20);
 		panelVBox.setAlignment(Pos.BOTTOM_RIGHT);
 		panelVBox.setPadding(new Insets(15, 15, 15, 15));
-		panelVBox.getChildren().addAll(panelText, panelButton);
+		panelVBox.getChildren().addAll(panelText);
 		
 		Image gate1 = new Image("file:and.png");
 	   	ImageView gate1V = new ImageView(gate1);
@@ -108,13 +103,18 @@ public class GUI extends Application {
 		HBox HBoxDraw = new HBox(1);
 		HBoxDraw.setAlignment(Pos.CENTER_RIGHT);
 		HBoxDraw.getChildren().addAll(sb);
-
-
+//		
+//
+		Button buttonReset = new Button("Nuevo Cicuito");
+		Button buttonExitDC = new Button("Salir");
+		VBox VBoxButton = new VBox(10);
+		VBoxButton.setAlignment(Pos.CENTER_LEFT);
+		VBoxButton.getChildren().addAll(buttonReset, buttonExitDC);
 
 		HBox panelMain = new HBox(200);
 		//panelMain.setAlignment(Pos.CENTER_LEFT);
 		panelMain.setPadding(new Insets(15, 15, 15, 15));
-		panelMain.getChildren().addAll( panelLogicGates, HBoxDraw);
+		panelMain.getChildren().addAll( panelLogicGates, HBoxDraw, VBoxButton);
 
 		BorderPane canvas2 = new BorderPane();
 		canvas2.getChildren().addAll(panelMain);
@@ -125,8 +125,9 @@ public class GUI extends Application {
 
 		//******************************* Final Scene Circuit Designer*****************************//
 		button1.setOnAction(e -> primaryStage.setScene(display2));
-
 		buttonExitDC.setOnAction(e -> primaryStage.setScene(display1));
+		
+		
 		primaryStage.setTitle("Circuit Designer By Carmen Araya");
 		primaryStage.setResizable(false);
 		
@@ -143,7 +144,8 @@ public class GUI extends Application {
 			ImageView selected = gatesV[i];
 			String selected2 = gates[i];
 			dp.paintGates(draw, selected, selected2);
-		}
+		}	
+		
 	primaryStage.show();
 	}
 //---------------------------------------------------------------------------------------------------------//

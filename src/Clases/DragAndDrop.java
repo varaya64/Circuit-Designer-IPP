@@ -1,3 +1,4 @@
+package Clases;
 import Clases.FactoryGates;
 import Clases.List;
 import javafx.event.EventHandler;
@@ -9,13 +10,13 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 public class DragAndDrop {
-
 	
+	Put put = new Put();
+
 	public void paintGates(Pane panel, ImageView gateV, String gate) {
-		
-		List listGates = new List();
 		
 		gateV.setOnDragDetected(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
@@ -42,24 +43,12 @@ public class DragAndDrop {
 				Dragboard db = event.getDragboard();
 				boolean success = false;
 				if (db.hasString()) {
-				System.out.println("Solte mouse objetivo");
-				success = true;
-				ImageView nueva = new ImageView(); 
-				Image com = new Image(db.getString());
-				nueva.setImage(com);
-				double mouseX = event.getX();
-				double mouseY = event.getY();
-				double ancho = (nueva.getImage().getWidth()*0.5);
-				double largo = (nueva.getImage().getHeight()*0.5);
-				nueva.setX(mouseX-ancho);
-				nueva.setY(mouseY-largo);
-				panel.getChildren().addAll(nueva);	
-				listGates.addLast(db.getString());
-				
+				put.putImage(db.getString(), panel, event);
 				}
 				event.setDropCompleted(success);
 				event.consume();
 			}
 		});
 	}
+	
 }

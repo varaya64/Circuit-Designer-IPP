@@ -1,9 +1,13 @@
 package Clases;
 
+import javafx.scene.shape.Rectangle;
+
 public class Nor  extends LogicGate{
+
 
 	public Nor(String type) {
 		super(type);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -13,5 +17,7 @@ public class Nor  extends LogicGate{
 		this.setOutpot(result);
 		
 	}
+
+	
 
 }
