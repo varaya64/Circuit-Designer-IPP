@@ -24,8 +24,7 @@ public class List{
 		}
 		List.this.setLarge(List.this.getLarge()+1);
 	}
-	
-	
+		
 	public void recordList(Pane panel) {
 		LogicGate temp = first;
 		while (temp != null) {
@@ -33,6 +32,8 @@ public class List{
 			temp = temp.getNext();
 		}
 	}
+	
+	
 
 	public int getLarge() {
 		return large;

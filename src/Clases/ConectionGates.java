@@ -40,7 +40,7 @@ public class ConectionGates {
 
 	public static void putLines(Pane panel) { 
 		Line line = new Line(firstX, firstY, lastX, lastY);
-		line.setFill(randomColor());
+		line.setStroke(randomColor());
 		panel.getChildren().addAll(line);
 
 	}
@@ -50,7 +50,7 @@ public class ConectionGates {
         int r = random.nextInt(255);
         int g = random.nextInt(255);
         int b = random.nextInt(120);
-        return Color.rgb ( r , g , b ); 
+        return Color.rgb( r , g , b ); 
     }
 	
 }
