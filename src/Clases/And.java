@@ -12,7 +12,7 @@ public class And  extends LogicGate {
 
 	@Override
 	public void trueValue() {
-		boolean result = true;
+		Boolean result = true;
 		result = this.isInput1() && this.isInput2();
 		this.setOutpot(result);
 	}

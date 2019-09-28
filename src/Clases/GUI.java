@@ -114,9 +114,10 @@ public class GUI extends Application {
 		Button buttonReset = new Button("Nuevo Cicuito");
 		Button buttonExitDC = new Button("Salir");
 		Button buttonGetEntry = new Button("Obtener entradas");
+		Button buttonFinalValue = new Button("Valor final");
 		VBox VBoxButton = new VBox(50);
 		VBoxButton.setAlignment(Pos.CENTER_LEFT);
-		VBoxButton.getChildren().addAll(buttonReset, buttonExitDC, buttonGetEntry);
+		VBoxButton.getChildren().addAll(buttonReset, buttonExitDC, buttonGetEntry, buttonFinalValue);
 
 		HBox panelMain = new HBox(100);
 		panelMain.setPadding(new Insets(15, 15, 15, 15));
@@ -134,6 +135,7 @@ public class GUI extends Application {
 		buttonExitDC.setOnAction(e -> primaryStage.setScene(display1));
 		buttonReset.setOnAction(event -> Put.clearPane(draw, list));
 		buttonGetEntry.setOnAction(event -> list.getValues());
+		buttonFinalValue.setOnAction(event -> list.finalValue());
 		
 	
 		primaryStage.setTitle("Circuit Designer By Carmen Araya");

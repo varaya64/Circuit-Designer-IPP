@@ -48,7 +48,6 @@ public class Put {
 		panel.getChildren().addAll(nueva);
 	}	
 	
-	
 	public static void putRects(Pane panel, String image, Double mouseX, Double mouseY, Rectangle input1, Rectangle input2, Rectangle outpot) {
 		if (image == "file:and.png"|| image == "file:nand.png" ) {
 			input1.setX(mouseX-20);

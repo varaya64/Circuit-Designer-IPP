@@ -71,14 +71,37 @@ public class List{
 				}else {
 					temp.setInput2(false);
 				}
+				temp.trueValue();
+				System.out.println(temp.isOutpot());
 				temp = temp.getNext();
-				i = temp.getID();
 			}else {
 				temp = temp.getNext();
 			}
 		}
 	}
 
+	public void recordList2() {
+		LogicGate temp = first;
+		while (temp != null) {
+			if (temp.getPrevAux1() == null && temp.getPrevAux2() == null) {
+				temp = temp.getNext();
+			}else {
+				temp.setInput1(temp.getPrevAux1().isOutpot());
+				temp.setInput2(temp.getPrevAux2().isOutpot());
+				temp = temp.getNext();
+			}
+		}
+	}
+
+	public void finalValue() {
+		LogicGate temp = last;
+		Alert alert = new Alert(AlertType.ERROR); 
+		alert.setTitle("VALOR DE SALIDA DEL CIRCUITO");
+		alert.setHeaderText("Se muestra el valor obtenido a ciertas entradas:");
+		alert.setContentText("Valor:   " + Boolean.toString(temp.isOutpot()));
+		alert.showAndWait();
+	}
+	
 	public int getLarge() {
 		return large;
 	}
@@ -86,6 +109,6 @@ public class List{
 	public void setLarge(int large) {
 		this.large = large;
 	}
-	
+
 
 }

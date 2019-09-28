@@ -10,9 +10,9 @@ import javafx.scene.shape.Rectangle;
 
 public abstract class LogicGate {
 	
-	private boolean input1;
-	private boolean input2;
-	private boolean output;
+	private Boolean input1;
+	private Boolean input2;
+	private Boolean output;
 	private LogicGate next;
 	private LogicGate prev;
 	private LogicGate prevAux1;
@@ -43,22 +43,22 @@ public abstract class LogicGate {
 		}
 	}
 	
-	public boolean isInput1() {
+	public Boolean isInput1() {
 		return input1;
 	}
-	public void setInput1(boolean input1) {
+	public void setInput1(Boolean input1) {
 		this.input1 = input1;
 	}
-	public boolean isInput2() {
+	public Boolean isInput2() {
 		return input2;
 	}
-	public void setInput2(boolean input2) {
+	public void setInput2(Boolean input2) {
 		this.input2 = input2;
 	}
-	public boolean isOutpot() {
+	public Boolean isOutpot() {
 		return output;
 	}
-	public void setOutpot(boolean output) {
+	public void setOutpot(Boolean output) {
 		this.output = output;
 	}	
 	public abstract void trueValue();
