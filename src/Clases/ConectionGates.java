@@ -90,5 +90,5 @@ public class ConectionGates {
         int b = random.nextInt(120);
         return Color.rgb( r , g , b ); 
     }
-
+    
 }

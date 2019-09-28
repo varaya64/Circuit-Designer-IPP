@@ -1,6 +1,8 @@
 package Clases;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -32,8 +34,7 @@ public abstract class LogicGate {
 			ConectionGates.paintLines(LogicGate.this.getInput1R(), panel, temp);
 			ConectionGates.paintLines(LogicGate.this.getInput2R(), panel, temp);
 			ConectionGates.paintLines(LogicGate.this.getOutpot(), panel, temp);
-		}else if(prevAux1 != null && prevAux2 != null) {
-			System.out.println("No se puede conectar esta compuerta");	
+		}else if(prevAux1 != null && prevAux2 != null) {	
 		}else if (prevAux1 == null && prevAux2 != null) {
 			ConectionGates.paintLines(LogicGate.this.getInput1R(), panel, temp);
 			ConectionGates.paintLines(LogicGate.this.getOutpot(), panel, temp);

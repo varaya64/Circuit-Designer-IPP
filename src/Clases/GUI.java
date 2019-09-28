@@ -133,7 +133,7 @@ public class GUI extends Application {
 		button1.setOnAction(e -> primaryStage.setScene(display2));
 		buttonExitDC.setOnAction(e -> primaryStage.setScene(display1));
 		buttonReset.setOnAction(event -> Put.clearPane(draw, list));
-		buttonGetEntry.setOnAction(event -> System.out.println("recogiendo entradas"));
+		buttonGetEntry.setOnAction(event -> list.getValues());
 		
 	
 		primaryStage.setTitle("Circuit Designer By Carmen Araya");
