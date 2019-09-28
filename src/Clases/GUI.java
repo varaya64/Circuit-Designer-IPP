@@ -29,6 +29,12 @@ public class GUI extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 
+		DragAndDrop dp = new DragAndDrop();
+		Put put = new Put();
+		List list = new List();	
+		ConectionGates conections = new ConectionGates();
+		
+		
 		//Buttons
 		Button button1 = new Button("Diseñador Circuito");
 		Button button2 = new Button("Simulador de Circuitos");
@@ -107,12 +113,12 @@ public class GUI extends Application {
 //
 		Button buttonReset = new Button("Nuevo Cicuito");
 		Button buttonExitDC = new Button("Salir");
-		VBox VBoxButton = new VBox(10);
+		Button buttonGetEntry = new Button("Obtener entradas");
+		VBox VBoxButton = new VBox(50);
 		VBoxButton.setAlignment(Pos.CENTER_LEFT);
-		VBoxButton.getChildren().addAll(buttonReset, buttonExitDC);
+		VBoxButton.getChildren().addAll(buttonReset, buttonExitDC, buttonGetEntry);
 
-		HBox panelMain = new HBox(200);
-		//panelMain.setAlignment(Pos.CENTER_LEFT);
+		HBox panelMain = new HBox(100);
 		panelMain.setPadding(new Insets(15, 15, 15, 15));
 		panelMain.getChildren().addAll( panelLogicGates, HBoxDraw, VBoxButton);
 
@@ -126,28 +132,30 @@ public class GUI extends Application {
 		//******************************* Final Scene Circuit Designer*****************************//
 		button1.setOnAction(e -> primaryStage.setScene(display2));
 		buttonExitDC.setOnAction(e -> primaryStage.setScene(display1));
+		buttonReset.setOnAction(event -> Put.clearPane(draw, list));
+		buttonGetEntry.setOnAction(event -> System.out.println("recogiendo entradas"));
 		
-		
+	
 		primaryStage.setTitle("Circuit Designer By Carmen Araya");
 		primaryStage.setResizable(false);
-		
-		
+			
 //----------------------------------Drag and drop-------------------------------------------------//		
 		//Image[] gates = {gate1, gate2, gate3, gate4, gate5, gate6, gate7};
 		ImageView[] gatesV = {gate1V, gate2V, gate3V, gate4V, gate5V, gate6V, gate7V};
 		String[] gates = {"file:and.png", "file:nand.png", "file:nor.png", "file:not.png",
 				"file:or.png", "file:xnor.png", "file:xor.png"};
 		
-		DragAndDrop dp = new DragAndDrop();
 		
 		for (int i=0 ; i < 7; i++ ) {
 			ImageView selected = gatesV[i];
 			String selected2 = gates[i];
-			dp.paintGates(draw, selected, selected2);
+			dp.paintGates(draw, selected, selected2, put, list, conections);
 		}	
 		
 	primaryStage.show();
 	}
+	
+	
 //---------------------------------------------------------------------------------------------------------//
 
 }

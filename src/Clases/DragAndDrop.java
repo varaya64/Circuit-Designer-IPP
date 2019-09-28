@@ -13,10 +13,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 public class DragAndDrop {
-	
-	Put put = new Put();
 
-	public void paintGates(Pane panel, ImageView gateV, String gate) {
+	public void paintGates(Pane panel, ImageView gateV, String gate, Put put, List list, ConectionGates conections) {
 		
 		gateV.setOnDragDetected(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
@@ -43,7 +41,7 @@ public class DragAndDrop {
 				Dragboard db = event.getDragboard();
 				boolean success = false;
 				if (db.hasString()) {
-				put.putImage(db.getString(), panel, event);
+				put.putImage(db.getString(), panel, event, list, conections);
 				}
 				event.setDropCompleted(success);
 				event.consume();

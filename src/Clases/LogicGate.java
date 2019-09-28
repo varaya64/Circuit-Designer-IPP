@@ -27,19 +27,18 @@ public abstract class LogicGate {
 		Type = type;
 	}
 	
-	public void referencePrevAux(Pane panel) {
+	public void referencePrevAux(Pane panel, LogicGate temp) {
 		if (prevAux1 == null && prevAux2 == null) {
-			ConectionGates.paintLines(LogicGate.this.getInput1R(), panel);
-			ConectionGates.paintLines(LogicGate.this.getInput2R(), panel);
-			System.out.println("Se pueden conectar ambas compuertas");
+			ConectionGates.paintLines(LogicGate.this.getInput1R(), panel, temp);
+			ConectionGates.paintLines(LogicGate.this.getInput2R(), panel, temp);
+			ConectionGates.paintLines(LogicGate.this.getOutpot(), panel, temp);
 		}else if(prevAux1 != null && prevAux2 != null) {
 			System.out.println("No se puede conectar esta compuerta");	
 		}else if (prevAux1 == null && prevAux2 != null) {
-			ConectionGates.paintLines(LogicGate.this.getInput1R(), panel);
-			System.out.println("solo puedo conectar una entrada la 1");
+			ConectionGates.paintLines(LogicGate.this.getInput1R(), panel, temp);
+			ConectionGates.paintLines(LogicGate.this.getOutpot(), panel, temp);
 		}else if(prevAux1 != null && prevAux2 == null){
-			ConectionGates.paintLines(LogicGate.this.getInput2R(), panel);
-			System.out.println("solo puedo conectar una entrada la 1");
+			ConectionGates.paintLines(LogicGate.this.getOutpot(), panel, temp);
 		}
 	}
 	

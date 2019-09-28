@@ -12,27 +12,32 @@ public class List{
 	public List() {
 	}
 	
-	public void addLast(LogicGate node, Pane panel, String type, Double posX, Double posY, Rectangle input1, Rectangle input2) {
+	public void addLast(LogicGate node, Pane panel, String type, Double posX, Double posY) {
 		if (first == null && last==null) {
 			first = node;
 			last = node;
-			System.out.println(last.getID());
 		}else {
 			last.setNext(node);
 			node.setPrev(first);
 			last = node;
 		}
 		List.this.setLarge(List.this.getLarge()+1);
+		last.setID(getLarge());
+
 	}
 		
 	public void recordList(Pane panel) {
 		LogicGate temp = first;
 		while (temp != null) {
-			temp.referencePrevAux(panel);
+			temp.referencePrevAux(panel, temp);
 			temp = temp.getNext();
 		}
 	}
 	
+	public void deleteList() {
+		first = null;
+		last = null;
+	}
 	
 
 	public int getLarge() {
